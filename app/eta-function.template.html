@@ -1,0 +1,166 @@
+<div ng-if="etaFunctions.isWellDefined() && etaFunctions.hasFunctions()">
+    <!-- functions -->
+    <div ng-repeat="f in etaFunctions.getFunctions()">
+        <div class="panel panel-primary"">
+            <div class="panel-heading clearfix eta-text-xl">
+                <strong>Function</strong>
+                <span class="pull-right">
+                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="etaFunctions.removeFunctionAtIndex(index)">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+               </span>
+            </div>
+            <div class="panel-body">
+                <!-- operations for this function -->
+                <div class="panel panel-warning">
+                    <div class="panel-heading clearfix">
+                        <strong>Operations</strong>
+                        <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="f.clearOperations()">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    </div>
+                    <div class="panel-body" ng-if="f.hasOperationProperty()">
+                        <eta-term-collection tree-type="operation" added-terms-list="f.operation" color-class="warning"></eta-term-collection>
+                    </div>
+
+                    <div class="btn-group btn-group-justified" ng-if="!f.hasOperationProperty()">
+
+                        <a class="btn btn-default" ng-click="f.createOperation()">Add Operations</a>
+
+                    </div>
+                </div>
+                <hr>
+
+                <!-- Inputs (data and formats) for this function -->
+                <div ng-if="f.isInputWellDefined() && f.hasInputs()">
+                    <div class="panel panel-success" ng-repeat = "input in f.getInputs()">
+                        <div class="panel-heading">
+                            <strong>Input</strong>
+                            <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="f.removeInputAtIndex($index)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+                        <div class="panel-body">
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <strong>Input Data</strong>
+                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="input.clearData()">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                                <div class="panel-body" ng-if="input.hasDataProperty()">
+                                    <eta-term tree-type="data" added-term="input.data" color-class="success"></eta-term-collection>
+                                </div>
+
+                                <div class="btn-group btn-group-justified" ng-if="!input.hasDataProperty()">
+
+                                    <a class="btn btn-default" ng-click="input.createData()">Add Input Data</a>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <strong>Input Format</strong>
+                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="input.clearFormats()">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                                <div class="panel-body" ng-if="input.hasFormatProperty()">
+                                    <eta-term-collection tree-type="format" added-terms-list="input.format" color-class="success"></eta-term-collection>
+                                </div>
+
+                                <div class="btn-group btn-group-justified" ng-if="!input.hasFormatProperty()">
+
+                                    <a class="btn btn-default" ng-click="input.createFormat()">Add Input Format</a>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- Add other inputs -->
+                <div class="btn-group btn-group-justified">
+                    <a class="btn btn-success" ng-click="f.createInput()">Add Input</a>
+                </div>
+                <hr>
+                <!-- Outputs (data and formats) for this function -->
+                <div ng-if="f.isOutputWellDefined() && f.hasOutputs()">
+                    <div class="panel panel-danger" ng-repeat = "output in f.getOutputs()">
+                        <div class="panel-heading">
+                            <strong>Ouput</strong>
+                            <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="f.removeOutputAtIndex($index)">
+                                <span class="glyphicon glyphicon-remove"></span>
+                            </button>
+                        </div>
+                        <div class="panel-body">
+                            <p>Ouput data and format, show directly the directive or have the users click on a link and add output (like in bio.tools now)</p>
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <strong>Output Data</strong>
+                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="output.clearData()">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                                <div class="panel-body" ng-if="output.hasDataProperty()">
+                                   <eta-term tree-type="data" added-term="output.data" color-class="danger"></eta-term-collection>
+                                </div>
+
+                                <div class="btn-group btn-group-justified" ng-if="!output.hasDataProperty()">
+
+                                    <a class="btn btn-default" ng-click="output.createData()">Add Input Data</a>
+
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="panel panel-default">
+                                <div class="panel-heading clearfix">
+                                    <strong>Output Format</strong>
+                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="output.clearFormats()">
+                                        <span class="glyphicon glyphicon-remove"></span>
+                                    </button>
+                                </div>
+                                <div class="panel-body" ng-if="output.hasFormatProperty()">
+                                    <eta-term-collection tree-type="format" added-terms-list="output.format" color-class="danger"></eta-term-collection>
+                                </div>
+
+                                <div class="btn-group btn-group-justified" ng-if="!output.hasFormatProperty()">
+
+                                    <a class="btn btn-default" ng-click="output.createFormat()">Add Input Format</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add other inputs -->
+                <div class="btn-group btn-group-justified">
+                    <a class="btn btn-danger" ng-click="f.createOutput()">Add Output</a>
+                </div>
+                <hr>
+                <!--<div ng-show="f.hasCommentProperty()">
+                    <div class="form-group">
+                        <label for="comment">Comment:</label>
+                        <textarea class="form-control" rows="2" id="comment" ng-model=f.comment></textarea>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-justified" ng-hide="f.hasOwnProperty('comment')">
+                    <a class="btn btn-default" ng-click="f.createComment()">Add Comment</a>
+                </div>-->
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea class="form-control" rows="2" id="comment" ng-model=f.comment></textarea>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+
+
+<div class="btn-group btn-group-justified">
+    <a class="btn btn-primary" ng-click='etaFunctions.createFunction()'>Add Function</a>
+</div>

@@ -1,0 +1,67 @@
+/*
+    This is the CSS file for the EDAM Tool Annotator.
+    Should be included in the <ref> list after the other css files used by the EDAM Tool Annotator (e.g. angucomplete-alt, angular-tree-control etc. )
+ */
+
+/*
+---- ETA (EDAM Tool Annotator related css) ----
+ */
+.eta-border {
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 5px;
+    padding: 15px;
+}
+
+.center-block {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.eta-text-xl{
+    font-size: 1.5em;
+}
+
+/*
+---- Angucomplete-alt autocomplete CSS ----
+
+ */
+/*
+    Highlight matched elemenents in the dropdown
+*/
+.angucomplete-highlight {
+    color: #ff0000;
+}
+
+/*
+    Changed the dropdown selected row colors
+ */
+.angucomplete-selected-row {
+    background-color: #B9D3EE;
+    color: #000000;
+}
+
+/*
+    Make font size 1em default so it does not force another size and by extension depends of other parent elements font-size definitions
+ */
+.angucomplete-searching {
+   font-size: 1em;
+}
+
+/*
+    Make the description text smaller then the main (title) text
+ */
+.angucomplete-description {
+    font-size: 0.85em;
+}
+
+/*
+    Add a scrollbar
+    Make the width 100%
+ */
+.angucomplete-dropdown {
+    overflow-y: auto;
+    max-height: 350px;
+    width: 100%;
+}

@@ -1,7 +1,9 @@
 'use strict';
 
-// Define the `edamToolAnnotator` module
-angular.module('edamToolAnnotator', [
+// Define the `demo` app module
+angular.module('mydemo', [
   // ...which depends on other modules
-    //'etaCore',
+    'edamToolAnnotator'
 ]);
+
+

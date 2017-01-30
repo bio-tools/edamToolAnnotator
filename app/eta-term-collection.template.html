@@ -1,0 +1,104 @@
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+            <h5>Added {{treeType}} terms ({{etaTerms.terms.length}}):</h5>
+        </div>
+    </div>
+    <div class="row ">
+        <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 col-xl-6">
+
+            <div class="list-group" ng-if="etaTerms.terms.length > 0">
+                <a class="list-group-item list-group-item-{{colorClass}} clearfix" ng-repeat="item in etaTerms.getAsArray()">
+                    {{item.term}} , {{item.uri}}
+                    <span class="pull-right">
+                        <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="etaTerms.removeAtIndex($index)"><span class="glyphicon glyphicon-remove"></span></button>
+                    </span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div angucomplete-alt
+            id="autocomplete-1"
+            placeholder="Search {{treeType}}"
+            pause="100"
+            selected-object="onSelected"
+            local-data="flatEDAMTree"
+            title-field="text"
+            minlength="2"
+            input-class="form-control form-control-small"
+            match-class="angucomplete-highlight"
+            local-search="fuseBranchSearch"
+            maxlength="50"
+            description-field="longtext"
+            class="angucomplete-overflowscroll">
+
+        </div>
+    </div>
+    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                <treecontrol
+                class="tree-light"
+                tree-model="edamTree"
+                options="treeOptions"
+                on-selection="showSelected(node)"
+                order-by="orderby"
+                reverse-order="false"
+                expanded-nodes="expandedNodes"
+                selected-nodes="selectedNodes"
+                selected-node="selectedNode"
+                >
+                {{node.text}}
+            </treecontrol>
+            <hr>
+        </div>
+
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="btn-group btn-group-justified">
+                        <a class="btn btn-{{colorClass}}" ng-click="addTerm(selectedTerm)" >Add Term To List</a>
+                        <a class="btn btn-default">Request term</a>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                    <strong>Name:</strong>
+                    <p>{{selectedTerm.text}}</p>
+
+                    <strong>Definition:</strong>
+                    <p>{{selectedTerm.definition}}</p>
+
+                    <strong>Exact Synonyms:</strong>
+                    <ul ng-if="selectedTerm.exact_synonyms.length > 0">
+                        <li ng-repeat="eSyn in selectedTerm.exact_synonyms">
+                            {{eSyn}}
+                        </li>
+                    </ul>
+                    <p ng-if="selectedTerm.exact_synonyms.length == 0">[]</p>
+                    <strong>Narrow Synonyms:</strong>
+                    <ul ng-if="selectedTerm.narrow_synonyms.length > 0">
+                        <li ng-repeat="nSyn in selectedTerm.narrow_synonyms">
+                            {{nSyn}}
+                        </li>
+                    </ul>
+                    <p ng-if="selectedTerm.narrow_synonyms.length == 0">[]</p>
+
+                    <strong>URI: <a ng-href="{{selectedTerm.data.uri}}" target="blank">{{selectedTerm.data.uri}}</a></strong>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+</div>
+
+
+

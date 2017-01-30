@@ -8,6 +8,10 @@
   "dependencies": {
     "angular": "1.4.x",
     "angular-mocks": "1.4.x",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "angular-bootstrap": "~0.14.3",
+    "angucomplete-alt": "^2.5.0",
+    "fuse.js": "^2.5.0",
+    "angular-tree-control": "^0.2.28"
   }
 }

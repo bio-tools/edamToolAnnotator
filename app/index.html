@@ -1,15 +1,67 @@
 <!doctype html>
-<html lang="en" ng-app="edamToolAnnotator">
-  <head>
+<html lang="en" ng-app="mydemo">
+<head>
     <meta charset="utf-8">
     <title>EDAM Tool Annotator</title>
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="app.css" />
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="app.module.js"></script>
-  </head>
-  <body>
-    <h1>EDAM Tool Annotator</h1>
 
-  </body>
+
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css">
+    <link rel="stylesheet" href="app.css" />
+
+    <script src="jsonpath-0.8.0.js"></script>
+    <script src="eta-objects.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+    <script src="bower_components/angular-tree-control/angular-tree-control.js"></script>
+    <script src="bower_components/fuse.js/src/fuse.min.js"></script>
+    <script src="app.module.js"></script>
+    <script src="edam-tool-annotator.module.js"></script>
+    <script src="fuse.service.js"></script>
+    <script src="etacore.service.js"></script>
+    <script src="eta-term-collection.directive.js"></script>
+    <script src="eta-term.directive.js"></script>
+    <script src="eta-function.directive.js"></script>
+
+    <link rel="stylesheet" href="bower_components/angular-tree-control/css/tree-control.css" />
+    <link rel="stylesheet" href="bower_components/angular-tree-control/css/tree-control-attribute.css" />
+
+
+</head>
+<body>
+    <div class="container" ng-init='atl = []'>
+        <h1>EDAM Tool Annotator</h1>
+
+        <div class="panel panel-primary">
+            <div class="panel-heading eta-text-xl clearfix">
+                <strong>Topic</strong>
+                <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </div>
+            <div class="panel-body">
+                <eta-term-collection tree-type="topic" added-terms-list="atl" color-class="info"></eta-term-collection>
+            </div>
+        </div>
+        <hr>
+        <pre>"topic":{{atl | json}}
+        </pre>
+    </div>
+
+    <hr>
+
+    <div class="container" ng-init='f={"function":[{"operation":[]}]}'>
+
+        <eta-function functions = "f"></eta-function>
+
+        <hr>
+        <pre>"function":{{f.function | json}}
+        </pre>
+
+        <!--<pre>{{f | json}}
+        </pre>-->
+
+    </div>
+    <hr>
+</body>
 </html>
