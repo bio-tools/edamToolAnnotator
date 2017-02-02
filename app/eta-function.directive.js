@@ -24,13 +24,17 @@ angular.module('edamToolAnnotator').directive('etaFunction', ['ETACore', functio
         link: function($scope, iElm, iAttrs, controller) {
 
             $scope.etaFunctions = new ETAFunctions($scope.functions);
-            console.log(JSON.stringify($scope.etaFunctions,null,'\t'));
+
 
             $scope.$watch('functions', function(newValue, oldValue) {
                 if ($scope.changeSource === "out"){
                     $scope.changeSource = "in";
                     $scope.etaFunctions = new ETAFunctions($scope.functions);
                     console.log("change from outside");
+                }else if (newValue !== oldValue){
+                    // require the code outside of the annotator to change the value of changeSource
+                    // do it in a controller or somewhere in the outside code
+                    console.log("yep, I've changed...");
                 }
             }, true);
 

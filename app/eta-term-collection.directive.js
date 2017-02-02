@@ -9,12 +9,44 @@ return {
      scope: {
          treeType: "@", // have some checks to see if in ['operation','topic','data','format']
          addedTermsList:"=?",
-         dropdownSearchId:"=?",
+         autocompleteId:"@?",
          changeSource: "=?",
          colorClass: "@?"
 
      }, // {} = isolate, true = child, false/undefined = no change
      controller: function($scope, $element, $attrs, $transclude) {
+         $scope.isCollapsed = false;
+         $scope.myFilter = "";
+         $scope.myComparator = false;
+         $scope.siblings = "all";
+         $scope.searchBy = ["Name","Exact Synonyms", "Narrow Synonyms", "Definition"];
+         $scope.selectedBy = $scope.searchBy.slice(0, 3);
+         $scope.fuseSearchKeys = ["text","exact_synonyms", "narrow_synonyms"];
+
+         $scope.fuseSearchBy = {
+             "Name":"text",
+             "Exact Synonyms": "exact_synonyms",
+             "Narrow Synonyms": "narrow_synonyms",
+             "Definition": "definition"
+         }
+
+
+         $scope.toggleSearchBy = function toggleSelection(by) {
+             var idx = $scope.selectedBy.indexOf(by);
+
+             // Is currently selected
+             if (idx > -1) {
+               $scope.selectedBy.splice(idx, 1);
+               $scope.fuseSearchKeys.splice(idx,1);
+             }
+
+             // Is newly selected
+             else {
+               $scope.selectedBy.push(by);
+               $scope.fuseSearchKeys.push($scope.fuseSearchBy[by]);
+             }
+         };
+
          if ($scope.changeSource === undefined || $scope.changeSource === null || $scope.changeSource !== 'in' || $scope.changeSource !== 'out' ) {
                 $scope.changeSource = "out";
          }
@@ -82,6 +114,17 @@ return {
             });
 
             $scope.selectedTerm = $scope.selectedNodes[0];
+
+            if ($scope.siblings === "all"){
+                $scope.myFilter = "";
+                $scope.myComparator = false;
+            }else if ($scope.siblings === "similar"){
+                $scope.myFilter = $scope.selectedTerm.text;
+                $scope.myComparator = false;
+            }else{
+                $scope.myFilter = $scope.selectedTerm.text;
+                $scope.myComparator = true;
+            }
         };
 
 
@@ -92,9 +135,9 @@ return {
             $scope.selectedTerm = node;
 
             if (node.text === $scope.flatEDAMTree[node.flatID].text){
-                $scope.$broadcast('angucomplete-alt:changeInput', 'autocomplete-1', node.text);
+                $scope.$broadcast('angucomplete-alt:changeInput', $scope.autocompleteId, node.text);
             }else{
-                $scope.$broadcast('angucomplete-alt:clearInput', 'autocomplete-1');
+                $scope.$broadcast('angucomplete-alt:clearInput', $scope.autocompleteId);
             }
 
         }
@@ -118,6 +161,19 @@ return {
              $scope.etaTerms =  new EDAMTermArray([]);
              $scope.addedTermsList = $scope.etaTerms.terms;
          }
+
+         $scope.$watch('siblings', function(newValue, oldValue) {
+            if ($scope.siblings === "all"){
+                $scope.myFilter = "";
+                $scope.myComparator = false;
+            }else if ($scope.siblings === "similar"){
+                $scope.myFilter = $scope.selectedTerm.text;
+                $scope.myComparator = false;
+            }else{
+                $scope.myFilter = $scope.selectedTerm.text;
+                $scope.myComparator = true;
+            }
+         }, true);
 
          $scope.$watch('addedTermsList', function(newValue, oldValue) {
             if ($scope.changeSource === "out"){
@@ -161,10 +217,10 @@ return {
      Use Fusejs to search.
      */
      $scope.fuseBranchSearch = function(str){
-         return FuseSearch.search(str,$scope.flatEDAMTree);
+         return FuseSearch.search(str,$scope.flatEDAMTree,$scope.fuseSearchKeys);
      }
 
-     console.log($scope.addedTermsList);
+
     }
 };
 }]);

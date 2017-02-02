@@ -8,14 +8,14 @@ service('FuseSearch', function(){
     //  The user can then tick/mark/select definition as a match, so it becomes a key
 
     //"sweet spot" for fuse options
-    this.search = function(str, edamFlatTree){
+    this.search = function(str, edamFlatTree, searchKeys){
         var options = {
             threshold: 0.2,
             shouldSort: true,
             location: 0,
             tokenize: true,
             matchAllTokens: true,
-            keys: ["text","exact_synonyms","narrow_synonyms","definition"]
+            keys: searchKeys
 
         };
 

@@ -7,8 +7,8 @@
         <div class="col-xs-12 col-sm-7 col-md-6 col-lg-6 col-xl-6">
 
             <div class="list-group" ng-if="etaTerms.terms.length > 0">
-                <a class="list-group-item list-group-item-{{colorClass}} clearfix" ng-repeat="item in etaTerms.getAsArray()">
-                    {{item.term}} , {{item.uri}}
+                <a class="list-group-item list-group-item-{{colorClass}} clearfix" ng-repeat="item in etaTerms.getAsArray()" ng-if="item.isSet()">
+                   <strong>{{item.term}}</strong> , {{item.uri}}
                     <span class="pull-right">
                         <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="etaTerms.removeAtIndex($index)"><span class="glyphicon glyphicon-remove"></span></button>
                     </span>
@@ -18,10 +18,10 @@
     </div>
 
 
-    <div class="row">
+    <div class="row" uib-collapse="isCollapsed">
         <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div angucomplete-alt
-            id="autocomplete-1"
+            id="{{autocompleteId}}"
             placeholder="Search {{treeType}}"
             pause="100"
             selected-object="onSelected"
@@ -35,6 +35,33 @@
             description-field="longtext"
             class="angucomplete-overflowscroll">
 
+        </div>
+        <div>
+           <h5>Search By:</h5>
+            <div class="checkbox" ng-repeat="by in searchBy">
+                <label>
+                    <input
+                        type="checkbox" value="{{by}}"
+                        ng-checked="selectedBy.indexOf(by) > -1"
+                        ng-click="toggleSearchBy(by)"
+                    >{{by}}
+                </label>
+            </div>
+        </div>
+        <div>
+            <h5>Show Siblings:</h5>
+             <label>
+                <input type="radio" ng-model="siblings" name="name-{{autocompleteId}}" value="all">
+                All
+            </label><br/>
+            <label>
+                <input type="radio" ng-model="siblings" name="name-{{autocompleteId}}" value="similar">
+                Similar
+            </label><br/>
+            <label>
+                <input type="radio" ng-model="siblings" nname="name-{{autocompleteId}}" value="none">
+                None
+            </label><br/>
         </div>
     </div>
     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 ">
@@ -50,6 +77,8 @@
                 expanded-nodes="expandedNodes"
                 selected-nodes="selectedNodes"
                 selected-node="selectedNode"
+                filter-expression="myFilter"
+                filter-comparator="myComparator"
                 >
                 {{node.text}}
             </treecontrol>
@@ -99,6 +128,10 @@
 
 </div>
 </div>
+<button type="button" class="btn btn-xs btn-default btn-block" ng-click="isCollapsed = !isCollapsed">
+<span class="glyphicon glyphicon-chevron-up" ng-if="!isCollapsed"></span>
+<span class="glyphicon glyphicon-chevron-down" ng-if="isCollapsed"></span>
+</button>
 
 
 

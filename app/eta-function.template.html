@@ -3,9 +3,9 @@
     <div ng-repeat="f in etaFunctions.getFunctions()">
         <div class="panel panel-primary"">
             <div class="panel-heading clearfix eta-text-xl">
-                <strong>Function</strong>
+                <strong>Function *</strong>
                 <span class="pull-right">
-                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="etaFunctions.removeFunctionAtIndex(index)">
+                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="etaFunctions.removeFunctionAtIndex($index)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                </span>
@@ -14,13 +14,14 @@
                 <!-- operations for this function -->
                 <div class="panel panel-warning">
                     <div class="panel-heading clearfix">
-                        <strong>Operations</strong>
+                        <strong>Operations *</strong>
                         <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="f.clearOperations()">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                     </div>
+
                     <div class="panel-body" ng-if="f.hasOperationProperty()">
-                        <eta-term-collection tree-type="operation" added-terms-list="f.operation" color-class="warning"></eta-term-collection>
+                        <eta-term-collection tree-type="operation" added-terms-list="f.operation" color-class="warning" autocomplete-id="auto-operation-{{$index}}"></eta-term-collection>
                     </div>
 
                     <div class="btn-group btn-group-justified" ng-if="!f.hasOperationProperty()">
@@ -43,36 +44,36 @@
                         <div class="panel-body">
                             <div class="panel panel-default">
                                 <div class="panel-heading clearfix">
-                                    <strong>Input Data</strong>
+                                    <strong>Input Data Type *</strong>
                                     <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="input.clearData()">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
                                 <div class="panel-body" ng-if="input.hasDataProperty()">
-                                    <eta-term tree-type="data" added-term="input.data" color-class="success"></eta-term-collection>
+                                    <eta-term tree-type="data" added-term="input.data" color-class="success" autocomplete-id="auto-indata-{{$parent.$index}}-{{$index}}"></eta-term-collection>
                                 </div>
 
                                 <div class="btn-group btn-group-justified" ng-if="!input.hasDataProperty()">
 
-                                    <a class="btn btn-default" ng-click="input.createData()">Add Input Data</a>
+                                    <a class="btn btn-default" ng-click="input.createData()">Add Input Data Type</a>
 
                                 </div>
                             </div>
                             <hr>
                             <div class="panel panel-default">
                                 <div class="panel-heading clearfix">
-                                    <strong>Input Format</strong>
+                                    <strong>Input Data Format</strong>
                                     <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="input.clearFormats()">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
                                 <div class="panel-body" ng-if="input.hasFormatProperty()">
-                                    <eta-term-collection tree-type="format" added-terms-list="input.format" color-class="success"></eta-term-collection>
+                                    <eta-term-collection tree-type="format" added-terms-list="input.format" color-class="success" autocomplete-id="auto-informat-{{$parent.$index}}-{{$index}}"></eta-term-collection>
                                 </div>
 
                                 <div class="btn-group btn-group-justified" ng-if="!input.hasFormatProperty()">
 
-                                    <a class="btn btn-default" ng-click="input.createFormat()">Add Input Format</a>
+                                    <a class="btn btn-default" ng-click="input.createFormat()">Add Input Data Format</a>
 
                                 </div>
                             </div>
@@ -95,40 +96,38 @@
                             </button>
                         </div>
                         <div class="panel-body">
-                            <p>Ouput data and format, show directly the directive or have the users click on a link and add output (like in bio.tools now)</p>
-
                             <div class="panel panel-default">
                                 <div class="panel-heading clearfix">
-                                    <strong>Output Data</strong>
+                                    <strong>Output Data Type *</strong>
                                     <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="output.clearData()">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
                                 <div class="panel-body" ng-if="output.hasDataProperty()">
-                                   <eta-term tree-type="data" added-term="output.data" color-class="danger"></eta-term-collection>
+                                   <eta-term tree-type="data" added-term="output.data" color-class="danger" autocomplete-id="auto-outdata-{{$parent.$index}}-{{$index}}"></eta-term-collection>
                                 </div>
 
                                 <div class="btn-group btn-group-justified" ng-if="!output.hasDataProperty()">
 
-                                    <a class="btn btn-default" ng-click="output.createData()">Add Input Data</a>
+                                    <a class="btn btn-default" ng-click="output.createData()">Add Output Data Type</a>
 
                                 </div>
                             </div>
                             <hr>
                             <div class="panel panel-default">
                                 <div class="panel-heading clearfix">
-                                    <strong>Output Format</strong>
+                                    <strong>Output Data Format</strong>
                                     <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="output.clearFormats()">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
                                 <div class="panel-body" ng-if="output.hasFormatProperty()">
-                                    <eta-term-collection tree-type="format" added-terms-list="output.format" color-class="danger"></eta-term-collection>
+                                    <eta-term-collection tree-type="format" added-terms-list="output.format" color-class="danger" autocomplete-id="auto-outformat-{{$parent.$index}}-{{$index}}"></eta-term-collection>
                                 </div>
 
                                 <div class="btn-group btn-group-justified" ng-if="!output.hasFormatProperty()">
 
-                                    <a class="btn btn-default" ng-click="output.createFormat()">Add Input Format</a>
+                                    <a class="btn btn-default" ng-click="output.createFormat()">Add Output Data Format</a>
 
                                 </div>
                             </div>

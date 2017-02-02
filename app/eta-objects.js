@@ -55,8 +55,8 @@ EDAMTerm.prototype.unset = function(){
 }
 
 EDAMTerm.prototype.isSet = function(){
-    return (this.hasOwnProperty("uri") && this.uri !== undefined && this.uri != null &&
-        this.hasOwnProperty("term") && this.term !== undefined && this.term != null
+    return (this.hasOwnProperty("uri") && (typeof this.uri === 'string' || this.uri instanceof String) &&
+        this.hasOwnProperty("term") && (typeof this.term === 'string' || this.term instanceof String)
         );
 }
 
@@ -70,8 +70,10 @@ function EDAMTermArray(arrayOfEDAMTerms){
 EDAMTermArray.prototype.fromArray = function(arr){
     this.terms = [];
     for (var i = 0; i < arr.length; i++ ){
-        var t = new EDAMTerm(arr[i].term, arr[i].uri);
-        this.addTermNoDuplicates(t);
+        if (arr[i] instanceof Object && arr[i].hasOwnProperty("term") && arr[i].hasOwnProperty("uri") && arr[i].term instanceof String && arr[i].uri instanceof String){
+            var t = new EDAMTerm(arr[i].term, arr[i].uri);
+            this.addTermNoDuplicates(t);
+        }
     }
     return this;
 }

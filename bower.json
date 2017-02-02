@@ -12,6 +12,7 @@
     "angular-bootstrap": "~0.14.3",
     "angucomplete-alt": "^2.5.0",
     "fuse.js": "^2.5.0",
-    "angular-tree-control": "^0.2.28"
+    "angular-tree-control": "^0.2.28",
+    "angular-animate":"1.4.x"
   }
 }

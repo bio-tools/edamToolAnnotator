@@ -2,7 +2,7 @@
 <html lang="en" ng-app="mydemo">
 <head>
     <meta charset="utf-8">
-    <title>EDAM Tool Annotator</title>
+    <title>EDAM Tool Annotator DEMO</title>
 
 
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -11,7 +11,10 @@
 
     <script src="jsonpath-0.8.0.js"></script>
     <script src="eta-objects.js"></script>
+
     <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap.min.js"></script>
     <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
     <script src="bower_components/angular-tree-control/angular-tree-control.js"></script>
     <script src="bower_components/fuse.js/src/fuse.min.js"></script>
@@ -29,39 +32,41 @@
 
 </head>
 <body>
-    <div class="container" ng-init='atl = []'>
-        <h1>EDAM Tool Annotator</h1>
-
+     <div class="container" ng-init='f={"contact":[{}],"function":[{"operation":[""]}],"topic":[{}],"toolType":[""]}'>
+        <h1>EDAM Tool Annotator DEMO</h1>
+        <div ng-controller="mydemocontroller" class="panel panel-primary">
+            <div class="panel-heading eta-text-xl clearfix">
+                <strong>Summary</strong>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="name">Resource Name:</label>
+                    <input type="text" class="form-control" id="name" ng-model="f.name">
+                </div>
+                <div class="form-group">
+                    <label for="id">Resource ID:</label>
+                    <input type="text" class="form-control" id="id"  ng-model="f.id" disabled>
+                </div>
+            </div>
+        </div>
         <div class="panel panel-primary">
             <div class="panel-heading eta-text-xl clearfix">
-                <strong>Topic</strong>
+                <strong>Topic *</strong>
                 <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="">
                     <span class="glyphicon glyphicon-remove"></span>
                 </button>
             </div>
             <div class="panel-body">
-                <eta-term-collection tree-type="topic" added-terms-list="atl" color-class="info"></eta-term-collection>
+                <eta-term-collection tree-type="topic" added-terms-list="f.topic" color-class="info" autocomplete-id="topic-id"></eta-term-collection>
             </div>
         </div>
         <hr>
-        <pre>"topic":{{atl | json}}
-        </pre>
-    </div>
-
-    <hr>
-
-    <div class="container" ng-init='f={"function":[{"operation":[]}]}'>
-
         <eta-function functions = "f"></eta-function>
-
         <hr>
-        <pre>"function":{{f.function | json}}
+        <pre>{{f | json}}
         </pre>
-
-        <!--<pre>{{f | json}}
-        </pre>-->
-
     </div>
+
     <hr>
 </body>
 </html>
