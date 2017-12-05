@@ -1,4 +1,4 @@
 # EDAM Tool Annotator
 
-##Demo:
+## Demo:
 [http://people.binf.ku.dk/vzn529/eta](http://people.binf.ku.dk/vzn529/eta)
