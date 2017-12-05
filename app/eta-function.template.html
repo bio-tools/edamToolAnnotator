@@ -5,7 +5,7 @@
             <div class="panel-heading clearfix eta-text-xl">
                 <strong>Function *</strong>
                 <span class="pull-right">
-                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="etaFunctions.removeFunctionAtIndex($index)">
+                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="removeOnConfirm(etaFunctions, 'removeFunctionAtIndex', $index)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                </span>
@@ -15,7 +15,7 @@
                 <div class="panel panel-warning">
                     <div class="panel-heading clearfix">
                         <strong>Operations *</strong>
-                        <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="f.clearOperations()">
+                        <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="removeOnConfirm(f, 'clearOperations', null)">
                         <span class="glyphicon glyphicon-remove"></span>
                     </button>
                     </div>
@@ -37,7 +37,7 @@
                     <div class="panel panel-success" ng-repeat = "input in f.getInputs()">
                         <div class="panel-heading">
                             <strong>Input</strong>
-                            <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="f.removeInputAtIndex($index)">
+                            <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="removeOnConfirm(f,'removeInputAtIndex',$index)">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -45,7 +45,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading clearfix">
                                     <strong>Input Data Type *</strong>
-                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="input.clearData()">
+                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="removeOnConfirm(input, 'clearData', null)">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
@@ -63,7 +63,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading clearfix">
                                     <strong>Input Data Format</strong>
-                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="input.clearFormats()">
+                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="removeOnConfirm(input, 'clearFormats', null)">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
@@ -91,7 +91,7 @@
                     <div class="panel panel-danger" ng-repeat = "output in f.getOutputs()">
                         <div class="panel-heading">
                             <strong>Ouput</strong>
-                            <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="f.removeOutputAtIndex($index)">
+                            <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="removeOnConfirm(f,'removeOutputAtIndex',$index)">
                                 <span class="glyphicon glyphicon-remove"></span>
                             </button>
                         </div>
@@ -99,7 +99,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading clearfix">
                                     <strong>Output Data Type *</strong>
-                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="output.clearData()">
+                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="removeOnConfirm(output, 'clearData',null)">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>
@@ -117,7 +117,7 @@
                             <div class="panel panel-default">
                                 <div class="panel-heading clearfix">
                                     <strong>Output Data Format</strong>
-                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="output.clearFormats()">
+                                    <button class="btn btn-default btn-xs highlight-icon pull-right" type="button" ng-click="removeOnConfirm(output, 'clearFormats',null)">
                                         <span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                 </div>

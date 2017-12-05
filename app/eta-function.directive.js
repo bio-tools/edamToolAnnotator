@@ -13,6 +13,21 @@ angular.module('edamToolAnnotator').directive('etaFunction', ['ETACore', functio
             if ($scope.changeSource === undefined || $scope.changeSource === null || $scope.changeSource !== 'in' || $scope.changeSource !== 'out' ) {
                 $scope.changeSource = "out";
             }
+
+            $scope.removeOnConfirm = function(object, removeFunctionString, index){
+
+                if (confirm("Are you sure you want to remove this element?")){
+                    console.log(object);
+                    console.log(index);
+                    console.log(removeFunctionString);
+                    if (index !== null){
+                        object[removeFunctionString](index);
+                    }else{
+                        object[removeFunctionString]();
+                    }
+
+                }
+            }
         },
         // require: 'ngModel', // Array = multiple requires, ? = optional, ^ = check parent elements
         // restrict: 'A', // E = Element, A = Attribute, C = Class, M = Comment

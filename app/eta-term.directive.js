@@ -7,7 +7,7 @@ return {
     // priority: 1,
     // terminal: true,
      scope: {
-         treeType: "@", // have some checks to see if in ['operation','topic','data','format']
+         treeType: "@",
          addedTerm:"=?",
          autocompleteId:"@?",
          changeSource: "=?",
@@ -171,13 +171,15 @@ return {
     // http://chariotsolutions.com/blog/post/angularjs-corner-using-promises-q-handle-asynchronous-calls/
     var request = $http.get('EDAM_' + $scope.treeType +'.json')
     .then(function(res){
-        $scope.edamTree = [res.data.data];
+        $scope.edamTree = [res.data];
         $scope.selectedTerm = $scope.edamTree[0];
         $scope.selectedNode = $scope.edamTree[0];
         $scope.expandedNodes = [$scope.edamTree[0]];
 
 
         $scope.flatEDAMTree = ETACore.removeDuplicateTerms(ETACore.flattenEdamTree($scope.edamTree[0]),$scope.edamTree);
+    }).catch(function(){
+        console.log("Unable to get EDAM " + $scope.treeType  + " branch.");
     });
 
     /*

@@ -32,23 +32,8 @@
 
 </head>
 <body>
-     <div class="container" ng-init='f={"contact":[{}],"function":[{"operation":[""]}],"topic":[{}],"toolType":[""]}'>
+     <div class="container" ng-init='f={"function":[{"operation":[""]}],"topic":[{}]}'>
         <h1>EDAM Tool Annotator DEMO</h1>
-        <div ng-controller="mydemocontroller" class="panel panel-primary">
-            <div class="panel-heading eta-text-xl clearfix">
-                <strong>Summary</strong>
-            </div>
-            <div class="panel-body">
-                <div class="form-group">
-                    <label for="name">Resource Name:</label>
-                    <input type="text" class="form-control" id="name" ng-model="f.name">
-                </div>
-                <div class="form-group">
-                    <label for="id">Resource ID:</label>
-                    <input type="text" class="form-control" id="id"  ng-model="f.id" disabled>
-                </div>
-            </div>
-        </div>
         <div class="panel panel-primary">
             <div class="panel-heading eta-text-xl clearfix">
                 <strong>Topic *</strong>
